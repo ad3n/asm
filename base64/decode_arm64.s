@@ -15,8 +15,8 @@
 	MOVD    lut+48(FP), R5;                                      \
 	VLD2R   (R5), [V0.B16, V1.B16]
 
-#define LOAD_CONST_LUT()                                       \
-	MOVD    $·mask_lut(SB), R6;                                  \
+#define LOAD_CONST_LUT(table)                                       \
+	MOVD    $table, R6;                                  \
 	MOVD    $·bpos_lut(SB), R7;                                  \
 	MOVD    $·shft_lut(SB), R8;                                  \
 	VLD1    (R6), [V2.B16];                                      \
@@ -119,10 +119,7 @@
 TEXT ·decodeARM64(SB),NOSPLIT,$0-72
 	LOAD_ARGS()
 	LOAD_ARG_LUT()
-	LOAD_CONST_LUT()
-	MOVD $·mask_imap_lut(SB), R6
-
-	VLD1 (R6), [V2.B16]
+	LOAD_CONST_LUT(·mask_imap_lut(SB))
 
 loop:
 	LOAD_INPUT()
@@ -150,10 +147,7 @@ done:
 TEXT ·decodeURLARM64(SB),NOSPLIT,$0-72
 	LOAD_ARGS()
 	LOAD_ARG_LUT()
-	LOAD_CONST_LUT()
-	MOVD $·mask_url_lut(SB), R6
-
-	VLD1 (R6), [V2.B16]
+	LOAD_CONST_LUT(·mask_url_lut(SB))
 
 loop:
 	LOAD_INPUT()
@@ -180,7 +174,7 @@ done:
 // func decodeStdARM64(dst []byte, src []byte, lut *int8) (int, int)
 TEXT ·decodeStdARM64(SB),NOSPLIT,$0-72
 	LOAD_ARGS()
-	LOAD_CONST_LUT()
+	LOAD_CONST_LUT(·mask_lut(SB))
 
 loop:
 	LOAD_INPUT()

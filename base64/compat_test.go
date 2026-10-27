@@ -216,34 +216,36 @@ func TestShortDestinationCompatibility(t *testing.T) {
 		return false
 	}
 	for _, enc := range encodings {
-		src := bytes.Repeat([]byte{0xa5}, 128)
-		encoded := []byte(enc.control.EncodeToString(src))
-		for _, encode := range []bool{false, true} {
-			input, size := encoded, len(src)
-			if encode {
-				input, size = src, len(encoded)
-			}
+		for _, inputSize := range []int{1, 2, 3, 31, 32, 33, 34, 47, 48, 49, 128} {
+			src := bytes.Repeat([]byte{0xa5}, inputSize)
+			encoded := []byte(enc.control.EncodeToString(src))
+			for _, encode := range []bool{false, true} {
+				input, size := encoded, len(src)
+				if encode {
+					input, size = src, len(encoded)
+				}
 
-			for n := 0; n <= size; n++ {
-				got, want := bytes.Repeat([]byte{0xcc}, size+32), bytes.Repeat([]byte{0xcc}, size+32)
-				gp := panics(func() {
-					if encode {
-						enc.candidate.Encode(got[:n:n], input)
-						return
+				for n := 0; n <= size; n++ {
+					got, want := bytes.Repeat([]byte{0xcc}, size+32), bytes.Repeat([]byte{0xcc}, size+32)
+					gp := panics(func() {
+						if encode {
+							enc.candidate.Encode(got[:n:n], input)
+							return
+						}
+
+						enc.candidate.Decode(got[:n:n], input)
+					})
+					wp := panics(func() {
+						if encode {
+							enc.control.Encode(want[:n:n], input)
+							return
+						}
+
+						enc.control.Decode(want[:n:n], input)
+					})
+					if gp != wp || !bytes.Equal(got, want) {
+						t.Fatalf("%s encode=%v destination=%d: panic=%v want=%v or modified bytes differ", enc.name, encode, n, gp, wp)
 					}
-
-					enc.candidate.Decode(got[:n:n], input)
-				})
-				wp := panics(func() {
-					if encode {
-						enc.control.Encode(want[:n:n], input)
-						return
-					}
-
-					enc.control.Decode(want[:n:n], input)
-				})
-				if gp != wp || !bytes.Equal(got, want) {
-					t.Fatalf("%s encode=%v destination=%d: panic=%v want=%v or modified bytes differ", enc.name, encode, n, gp, wp)
 				}
 			}
 		}

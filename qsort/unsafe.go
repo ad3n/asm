@@ -2,18 +2,32 @@ package qsort
 
 import "unsafe"
 
+type sliceHeader struct {
+	Data unsafe.Pointer
+	Len  int
+	Cap  int
+}
+
 func unsafeBytesTo64(b []byte) []uint64 {
-	return unsafe.Slice((*uint64)(unsafe.Pointer(unsafe.SliceData(b))), len(b)/8)
+	return *(*[]uint64)(unsafe.Pointer(cast(b, 8)))
 }
 
 func unsafeBytesTo128(b []byte) []uint128 {
-	return unsafe.Slice((*uint128)(unsafe.Pointer(unsafe.SliceData(b))), len(b)/16)
+	return *(*[]uint128)(unsafe.Pointer(cast(b, 16)))
 }
 
 func unsafeBytesTo192(b []byte) []uint192 {
-	return unsafe.Slice((*uint192)(unsafe.Pointer(unsafe.SliceData(b))), len(b)/24)
+	return *(*[]uint192)(unsafe.Pointer(cast(b, 24)))
 }
 
 func unsafeBytesTo256(b []byte) []uint256 {
-	return unsafe.Slice((*uint256)(unsafe.Pointer(unsafe.SliceData(b))), len(b)/32)
+	return *(*[]uint256)(unsafe.Pointer(cast(b, 32)))
+}
+
+func cast(b []byte, size int) *sliceHeader {
+	return &sliceHeader{
+		Data: *(*unsafe.Pointer)(unsafe.Pointer(&b)),
+		Len:  len(b) / size,
+		Cap:  len(b) / size,
+	}
 }
