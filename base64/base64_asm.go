@@ -38,15 +38,10 @@ func (enc *Encoding) Encode(dst, src []byte) {
 		return
 	}
 
-	if len(dst) < enc.EncodedLen(len(src)) {
-		standardEncoding(enc).Encode(dst, src)
-		return
-	}
-
-	if len(src) >= minEncodeLen && enc.enc != nil {
-		d, s := enc.enc(dst, src, &enc.enclut[0])
+	if len(src) >= minEncodeLen && enc.enc != nil && len(dst) >= enc.base.EncodedLen(len(src)) {
+		d, n := enc.enc(dst, src, &enc.enclut[0])
 		dst = dst[d:]
-		src = src[s:]
+		src = src[n:]
 	}
 
 	standardEncoding(enc).Encode(dst, src)
@@ -63,19 +58,21 @@ func (enc *Encoding) EncodedLen(n int) int {
 }
 
 func (enc *Encoding) Decode(dst, src []byte) (n int, err error) {
-	var d, s int
-	if len(src) >= minDecodeLen && enc.dec != nil && len(dst) >= enc.DecodedLen(len(src)) {
-		d, s = enc.dec(dst, src, &enc.declut[0])
-		dst = dst[d:]
-		src = src[s:]
-	}
-	n, err = standardEncoding(enc).Decode(dst, src)
-	n += d
-	if corrupt, ok := err.(base64.CorruptInputError); ok && s != 0 {
-		err = corrupt + base64.CorruptInputError(s)
+	if len(src) < minDecodeLen || enc.dec == nil || len(dst) < len(src)/4*3 {
+		if len(src) == 0 {
+			return 0, nil
+		}
+
+		return standardEncoding(enc).Decode(dst, src)
 	}
 
-	return
+	d, consumed := enc.dec(dst, src, &enc.declut[0])
+	n, err = enc.base.Decode(dst[d:], src[consumed:])
+	if corrupt, ok := err.(base64.CorruptInputError); ok && consumed != 0 {
+		err = corrupt + base64.CorruptInputError(consumed)
+	}
+
+	return n + d, err
 }
 
 func (enc *Encoding) DecodeString(s string) ([]byte, error) {
@@ -105,10 +102,6 @@ func fromStandardEncoding(enc *base64.Encoding) *Encoding {
 }
 
 func standardEncoding(enc *Encoding) *base64.Encoding {
-	if enc == nil {
-		return nil
-	}
-
 	if enc.base == nil {
 		return &zeroEncoding
 	}

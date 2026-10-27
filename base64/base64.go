@@ -33,9 +33,17 @@ func NewEncoding(encoder string) *Encoding {
 }
 
 func NewEncoder(enc *Encoding, w io.Writer) io.WriteCloser {
+	if enc == nil {
+		return base64.NewEncoder(nil, w)
+	}
+
 	return base64.NewEncoder(standardEncoding(enc), w)
 }
 
 func NewDecoder(enc *Encoding, r io.Reader) io.Reader {
+	if enc == nil {
+		return base64.NewDecoder(nil, r)
+	}
+
 	return base64.NewDecoder(standardEncoding(enc), r)
 }

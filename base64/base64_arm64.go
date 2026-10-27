@@ -33,10 +33,14 @@ func (e *Encoding) enableEncodeARM64(encoder string) {
 }
 
 func (e *Encoding) enableDecodeARM64(encoder string) {
-	if encoder == encodeStd {
+	switch encoder {
+	case encodeStd:
 		e.dec = decodeStdARM64
-	} else {
+	case encodeURL:
+		e.dec = decodeURLARM64
+	default:
 		e.dec = decodeARM64
 	}
+
 	e.declut = [decLutSize]int8{int8(encoder[62]), int8(encoder[63])}
 }
