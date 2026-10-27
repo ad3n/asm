@@ -3,9 +3,9 @@ package sortedset
 import (
 	"bytes"
 
-	"github.com/segmentio/asm/cpu"
-	"github.com/segmentio/asm/cpu/x86"
-	"github.com/segmentio/asm/internal"
+	"github.com/ad3n/asm/cpu"
+	"github.com/ad3n/asm/cpu/x86"
+	"github.com/ad3n/asm/internal"
 )
 
 func Union(dst, a, b []byte, size int) []byte {

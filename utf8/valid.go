@@ -3,7 +3,7 @@ package utf8
 import (
 	"unicode/utf8"
 
-	"github.com/segmentio/asm/ascii"
+	"github.com/ad3n/asm/ascii"
 )
 
 type Validation byte

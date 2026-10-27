@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/segmentio/asm/internal/buffer"
+	"github.com/ad3n/asm/internal/buffer"
 )
 
 func fillBuffers(b *buffer.Buffer, size int) map[string][]byte {

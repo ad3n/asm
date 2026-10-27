@@ -7,7 +7,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	"github.com/segmentio/asm/internal/buffer"
+	"github.com/ad3n/asm/internal/buffer"
 )
 
 var testStrings = [...]string{

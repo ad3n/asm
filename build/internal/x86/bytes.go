@@ -5,7 +5,7 @@ import (
 	. "github.com/mmcloughlin/avo/operand"
 	. "github.com/mmcloughlin/avo/reg"
 
-	"github.com/segmentio/asm/cpu"
+	cpu "github.com/ad3n/asm/cpu/x86"
 )
 
 type Memory struct {

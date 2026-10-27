@@ -1,6 +1,6 @@
 package bswap
 
-import _ "github.com/segmentio/asm/cpu"
+import _ "github.com/ad3n/asm/cpu"
 
 // Swap64 performs an in-place byte swap on each 64 bits elements in b.
 //

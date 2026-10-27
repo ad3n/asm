@@ -7,7 +7,7 @@ import (
 	"testing"
 	stdlib "unicode/utf8"
 
-	"github.com/segmentio/asm/ascii"
+	"github.com/ad3n/asm/ascii"
 )
 
 func FuzzValid(f *testing.F) {

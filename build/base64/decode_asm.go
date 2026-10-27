@@ -16,8 +16,8 @@ import (
 	. "github.com/mmcloughlin/avo/gotypes"
 	. "github.com/mmcloughlin/avo/operand"
 	. "github.com/mmcloughlin/avo/reg"
-	. "github.com/segmentio/asm/build/internal/asm"
-	. "github.com/segmentio/asm/build/internal/x86"
+	. "github.com/ad3n/asm/build/internal/asm"
+	. "github.com/ad3n/asm/build/internal/x86"
 )
 
 var lutHi = ConstBytes("b64_dec_lut_hi", []byte{

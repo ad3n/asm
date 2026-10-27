@@ -8,7 +8,7 @@ import (
 	"encoding/base64"
 	"slices"
 
-	"github.com/segmentio/asm/internal/unsafebytes"
+	"github.com/ad3n/asm/internal/unsafebytes"
 )
 
 var zeroEncoding base64.Encoding

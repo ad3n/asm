@@ -5,7 +5,7 @@ package main
 import (
 	. "github.com/mmcloughlin/avo/build"
 
-	"github.com/segmentio/asm/build/internal/x86"
+	"github.com/ad3n/asm/build/internal/x86"
 )
 
 func init() {

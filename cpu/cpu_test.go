@@ -3,9 +3,9 @@ package cpu_test
 import (
 	"testing"
 
-	"github.com/segmentio/asm/cpu/arm64"
-	"github.com/segmentio/asm/cpu/cpuid"
-	"github.com/segmentio/asm/cpu/x86"
+	"github.com/ad3n/asm/cpu/arm64"
+	"github.com/ad3n/asm/cpu/cpuid"
+	"github.com/ad3n/asm/cpu/x86"
 )
 
 var x86Tests = map[string]cpuid.Feature{

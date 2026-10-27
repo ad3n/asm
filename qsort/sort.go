@@ -3,10 +3,10 @@ package qsort
 import (
 	"sort"
 
-	"github.com/segmentio/asm/bswap"
-	"github.com/segmentio/asm/cpu"
-	"github.com/segmentio/asm/cpu/x86"
-	"github.com/segmentio/asm/internal"
+	"github.com/ad3n/asm/bswap"
+	"github.com/ad3n/asm/cpu"
+	"github.com/ad3n/asm/cpu/x86"
+	"github.com/ad3n/asm/internal"
 )
 
 // Sort sorts contiguous big-endian chunks of bytes of a fixed size.

@@ -1,6 +1,6 @@
 package slices
 
-import _ "github.com/segmentio/asm/cpu"
+import _ "github.com/ad3n/asm/cpu"
 
 // SumUint64 sums pairs of by index from x and y, similar to python's zip routine.
 // If available AVX instructions will be used to operate on many uint64s simultaneously.

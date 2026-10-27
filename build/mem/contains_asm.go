@@ -6,7 +6,7 @@ import (
 	. "github.com/mmcloughlin/avo/build"
 	. "github.com/mmcloughlin/avo/operand"
 	. "github.com/mmcloughlin/avo/reg"
-	. "github.com/segmentio/asm/build/internal/x86"
+	. "github.com/ad3n/asm/build/internal/x86"
 )
 
 func init() {

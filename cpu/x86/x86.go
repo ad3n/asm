@@ -1,7 +1,7 @@
 package x86
 
 import (
-	"github.com/segmentio/asm/cpu/cpuid"
+	"github.com/ad3n/asm/cpu/cpuid"
 	. "golang.org/x/sys/cpu"
 )
 

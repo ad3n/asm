@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/segmentio/asm/internal/buffer"
+	"github.com/ad3n/asm/internal/buffer"
 )
 
 func TestKeySet(t *testing.T) {

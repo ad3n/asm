@@ -2,9 +2,9 @@
 package cpu
 
 import (
-	"github.com/segmentio/asm/cpu/arm"
-	"github.com/segmentio/asm/cpu/arm64"
-	"github.com/segmentio/asm/cpu/x86"
+	"github.com/ad3n/asm/cpu/arm"
+	"github.com/ad3n/asm/cpu/arm64"
+	"github.com/ad3n/asm/cpu/x86"
 )
 
 var (

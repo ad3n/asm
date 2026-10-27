@@ -1,6 +1,6 @@
 package ascii
 
-import "github.com/segmentio/asm/internal/unsafebytes"
+import "github.com/ad3n/asm/internal/unsafebytes"
 
 // ValidPrint returns true if b contains only printable ASCII characters.
 func ValidPrint(b []byte) bool {

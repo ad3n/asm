@@ -1,4 +1,4 @@
-# asm ![build status](https://github.com/segmentio/asm/actions/workflows/go.yml/badge.svg) [![GoDoc](https://godoc.org/github.com/segmentio/asm?status.svg)](https://godoc.org/github.com/segmentio/asm)
+# asm ![build status](https://github.com/ad3n/asm/actions/workflows/go.yml/badge.svg) [![GoDoc](https://godoc.org/github.com/ad3n/asm?status.svg)](https://godoc.org/github.com/ad3n/asm)
 
 Go library providing algorithms that use the full power of modern CPUs to get
 the best performance.
@@ -92,7 +92,7 @@ cpu: Intel(R) Core(TM) i9-8950HK CPU @ 2.90GHz
 ```
 
 ```
-pkg: github.com/segmentio/asm/ascii
+pkg: github.com/ad3n/asm/ascii
 name                  old time/op    new time/op     delta
 EqualFoldString/0512     276ns ± 1%       21ns ± 2%    -92.50%  (p=0.008 n=5+5)
 
@@ -101,7 +101,7 @@ EqualFoldString/0512  3.71GB/s ± 1%  49.44GB/s ± 2%  +1232.79%  (p=0.008 n=5+5
 ```
 
 ```
-pkg: github.com/segmentio/asm/bswap
+pkg: github.com/ad3n/asm/bswap
 name    old time/op    new time/op     delta
 Swap64    11.2µs ± 1%      0.9µs ± 9%    -92.06%  (p=0.008 n=5+5)
 
@@ -110,7 +110,7 @@ Swap64  5.83GB/s ± 1%  73.67GB/s ± 9%  +1162.98%  (p=0.008 n=5+5)
 ```
 
 ```
-pkg: github.com/segmentio/asm/qsort
+pkg: github.com/ad3n/asm/qsort
 name            old time/op    new time/op     delta
 Sort16/1000000     269ms ± 2%       46ms ± 3%   -83.08%  (p=0.008 n=5+5)
 
@@ -125,12 +125,12 @@ and orchestrated by a Makefile which helps maintainers rebuild the assembly
 source code when the AVO files are modified.
 
 The repository contains two Go modules; the main module is declared as
-`github.com/segmentio/asm` at the root of the repository, and the second
+`github.com/ad3n/asm` at the root of the repository, and the second
 module is found in the `build` subdirectory.
 
 The `build` module is used to isolate build dependencies from programs that
 import the main module. Through this mechanism, AVO does not become a
-dependency of programs using `github.com/segmentio/asm`, keeping the
+dependency of programs using `github.com/ad3n/asm`, keeping the
 dependency management overhead minimal for the users, and allowing
 maintainers to make modifications to the `build` package.
 

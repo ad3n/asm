@@ -5,11 +5,11 @@ package main
 import (
 	. "github.com/mmcloughlin/avo/build"
 	. "github.com/mmcloughlin/avo/operand"
-	. "github.com/segmentio/asm/build/internal/asm"
-	. "github.com/segmentio/asm/build/internal/x86"
+	. "github.com/ad3n/asm/build/internal/asm"
+	. "github.com/ad3n/asm/build/internal/x86"
 
 	"github.com/mmcloughlin/avo/reg"
-	"github.com/segmentio/asm/cpu"
+	cpu "github.com/ad3n/asm/cpu/x86"
 )
 
 const unroll = 4

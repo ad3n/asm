@@ -1,6 +1,6 @@
 package ascii
 
-import _ "github.com/segmentio/asm/cpu"
+import _ "github.com/ad3n/asm/cpu"
 
 // https://graphics.stanford.edu/~seander/bithacks.html#HasLessInWord
 const (

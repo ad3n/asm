@@ -6,11 +6,11 @@ import (
 	. "github.com/mmcloughlin/avo/build"
 	. "github.com/mmcloughlin/avo/operand"
 	. "github.com/mmcloughlin/avo/reg"
-	. "github.com/segmentio/asm/build/internal/x86"
+	. "github.com/ad3n/asm/build/internal/x86"
 
 	"fmt"
 
-	"github.com/segmentio/asm/cpu"
+	cpu "github.com/ad3n/asm/cpu/x86"
 )
 
 func init() {
@@ -52,7 +52,7 @@ func main() {
 
 	// Map to convert ASCII upper characters to lower case.
 	lowerCase := Mem{Base: GP64(), Scale: 1}
-	LEAQ(NewDataAddr(Symbol{Name: "github·com∕segmentio∕asm∕ascii·lowerCase"}, 0), lowerCase.Base)
+	LEAQ(NewDataAddr(Symbol{Name: "github·com∕ad3n∕asm∕ascii·lowerCase"}, 0), lowerCase.Base)
 	XORL(cmp, cmp)
 
 	Label("cmp8")

@@ -1,4 +1,4 @@
-module github.com/segmentio/asm
+module github.com/ad3n/asm
 
 go 1.27.3
 

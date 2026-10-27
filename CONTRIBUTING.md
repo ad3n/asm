@@ -1,4 +1,4 @@
-# Contributing to segmentio/asm
+# Contributing to ad3n/asm
 
 ## Code of Conduct
 
