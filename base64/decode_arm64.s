@@ -1,3 +1,5 @@
+//go:build !purego
+
 #include "textflag.h"
 
 #define LOAD_ARGS()                                            \
@@ -33,6 +35,13 @@
 	VCMEQ   V11.B8, v.B8, V15.B8;                                \
 	VCMEQ   V12.B8, v.B8, V16.B8;                                \
 	VCMEQ   V13.B8, v.B8, V17.B8
+
+#define REJECT_MATCHES(goto_err)                                \
+	VORR    V14.B8, V15.B8, V26.B8;                               \
+	VORR    V16.B8, V17.B8, V27.B8;                               \
+	VORR    V26.B8, V27.B8, V26.B8;                               \
+	VMOV    V26.D[0], R5;                                         \
+	CBNZ    R5, goto_err
 
 #define UPDATE_INPUT(v)                                        \
 	VBIT    V14.B8, v.B8, V10.B8;                                \
@@ -115,11 +124,19 @@
 TEXT ·decodeARM64(SB),NOSPLIT,$0-72
 	LOAD_ARGS()
 	LOAD_ARG_LUT()
+	MOVBU (R5), R9
 	LOAD_CONST_LUT()
 
 loop:
 	LOAD_INPUT()
+	COMPARE_INPUT(V6)
+	REJECT_MATCHES(done)
+	CMP $43, R9
+	BEQ normalize
+	COMPARE_INPUT(V5)
+	REJECT_MATCHES(done)
 
+normalize:
 	// Compare and normalize the 63rd and 64th characters
 	COMPARE_INPUT(V0)
 	UPDATE_INPUT(V5)

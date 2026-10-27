@@ -37,6 +37,7 @@ func main() {
 // number of keys (len(keyset)/16).
 func Lookup() {
 	TEXT("Lookup", NOSPLIT, "func(keyset []byte, key []byte) int")
+	Pragma("noescape")
 	Doc("Lookup searches for a key in a set of keys, returning its index if ",
 		"found. If the key cannot be found, the number of keys is returned.")
 

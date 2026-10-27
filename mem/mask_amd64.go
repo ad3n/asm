@@ -5,4 +5,6 @@
 package mem
 
 // Mask set bits of dst to zero and copies the one-bits of src to dst, returning the number of bytes written.
+//
+//go:noescape
 func Mask(dst []byte, src []byte) int

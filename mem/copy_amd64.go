@@ -4,5 +4,7 @@
 
 package mem
 
-// Copy copies src to dst, returning the number of bytes written.
-func Copy(dst []byte, src []byte) int
+// copyAsm copies src to dst, returning the number of bytes written.
+//
+//go:noescape
+func copyAsm(dst []byte, src []byte) int

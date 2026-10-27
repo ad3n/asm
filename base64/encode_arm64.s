@@ -1,3 +1,5 @@
+//go:build !purego
+
 #include "textflag.h"
 
 #define Rdst  R0

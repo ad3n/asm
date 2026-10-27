@@ -5,4 +5,6 @@
 package mem
 
 // Blend copies the one-bits of src to dst, returning the number of bytes written.
+//
+//go:noescape
 func Blend(dst []byte, src []byte) int

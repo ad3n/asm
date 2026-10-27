@@ -1,3 +1,4 @@
+//go:build ignore
 // +build ignore
 
 package main
@@ -12,5 +13,5 @@ func init() {
 }
 
 func main() {
-	x86.GenerateCopy("Copy", "copies src to dst, returning the number of bytes written.", nil)
+	x86.GenerateCopy("copyAsm", "copies src to dst, returning the number of bytes written.", nil)
 }

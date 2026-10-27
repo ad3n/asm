@@ -4,9 +4,9 @@
 
 #include "textflag.h"
 
-// func Copy(dst []byte, src []byte) int
+// func copyAsm(dst []byte, src []byte) int
 // Requires: AVX, CMOV, SSE2
-TEXT ·Copy(SB), NOSPLIT, $0-56
+TEXT ·copyAsm(SB), NOSPLIT, $0-56
 	MOVQ    dst_base+0(FP), AX
 	MOVQ    src_base+24(FP), CX
 	MOVQ    dst_len+8(FP), DX

@@ -56,6 +56,28 @@ When no assembly version of a function is available for the target platform,
 the package provides a generic implementation in Go which is automatically
 picked up by the compiler.
 
+## Standard library compatibility
+
+Compatibility applies to APIs with a standard library counterpart; this repository
+is not a replacement for every standard library package.
+
+| API | Compatibility contract |
+| --- | --- |
+| `base64` | All exported package functions, constants, and `Encoding` methods from `encoding/base64` are available. Custom alphabets use the standard library fallback. Decode results, partial output, strict mode, padding, and `CorruptInputError` offsets follow the standard library. |
+| `base64.Encoding` | On assembly builds this remains a wrapper with its existing private layout, not a type alias to `encoding/base64.Encoding`. Use this package's streaming constructors with its encodings. On `purego` and unsupported architectures it remains a standard library alias. |
+| `base64.CorruptInputError` | An alias to the standard library type, including type assertions and `errors.As`. |
+| `utf8.Valid` | Matches `unicode/utf8.Valid`. `Validate` and `Validation` additionally distinguish ASCII input. |
+| `mem.Copy` | Matches the builtin `copy` for byte slices, including overlapping buffers. |
+| `mem.ContainsByte` | Matches testing whether `bytes.IndexByte` is nonnegative. |
+| `ascii.EqualFold` / `EqualFoldString` | Matches `bytes.EqualFold` / `strings.EqualFold` on ASCII input. Unicode case folding is outside this package's contract. |
+| `bswap`, `cpu`, `keyset`, `qsort`, `slices`, `sortedset`, other `ascii` and `mem` operations | Specialized APIs with their existing contracts; they are not aliases of similarly named standard library packages or types. |
+
+`AppendEncode` and `AppendDecode` reuse destination capacity, allowing zero heap
+allocations when the caller supplies enough space. Streaming constructors and
+`AppendDecode` delegate to the standard library; existing encode/decode entry
+points retain assembly acceleration where available. `EncodeToString` needs one
+owned allocation for nonempty output on assembly builds.
+
 ## Showcase
 
 The purpose of this library being to improve the runtime efficiency of Go
@@ -123,8 +145,7 @@ Some libraries have custom purpose code for both amd64 and arm64. Others (qsort)
 have only amd64. Search for a `.s` file matching your architecture to be sure
 you are using the assembler optimized library instructions.
 
-The Go code requires Go 1.17 or above. These versions contain significant
-performance improvements compared to previous Go versions.
+The Go code requires Go 1.27.3 or above.
 
 `asm` version v1.1.5 and earlier maintain compatibility with Go 1.16.
 

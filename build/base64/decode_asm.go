@@ -1,3 +1,5 @@
+//go:build ignore
+
 // +build ignore
 //
 // This code is a go assembly implementation of:
